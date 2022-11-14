@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cart extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $table = "cart";
-    protected $attributes = [
-        'trash' => 0,
-    ];
+    
     protected $fillable = [
         'customerId',
         'totalQuantity',
         'totalMoney',
-        'trash',
     ];
 }

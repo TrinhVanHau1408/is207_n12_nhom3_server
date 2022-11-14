@@ -21,7 +21,6 @@ class OrderItemFactory extends Factory
             'quantity' => $this->faker->randomElement([2, 3, 5]),
             'priceSale' => $this->faker->randomElement([2000000, 30000000, 50000000]),
             'totalPrice' => $this->faker->randomElement([2000000, 30000000, 50000000]) ,
-            'trash' => 0,
         ];
     }
 }

@@ -23,7 +23,7 @@ class CreateCustomerTable extends Migration
             $table->string('email');
             $table->string('status');
             $table->string('address');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

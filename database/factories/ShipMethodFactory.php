@@ -17,7 +17,6 @@ class ShipMethodFactory extends Factory
             'name' => $this->faker->unique()->numerify('Ship-####'),
             'feePrice' => $this->faker->randomElement([5000, 10000, 15000]) ,
             'deliveryTime' => $this->faker->date(now()),
-            'trash' => 0,
         ];
     }
 }

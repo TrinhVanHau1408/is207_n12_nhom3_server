@@ -16,7 +16,6 @@ class ColorFactory extends Factory
         return [
             'name' => $this->faker->unique()->safeColorName(),
             'percentPrice' =>$this->faker->unique()->randomElement([2, 5, 6, 10]),
-            'trash' => 0,
         ];
     }
 }

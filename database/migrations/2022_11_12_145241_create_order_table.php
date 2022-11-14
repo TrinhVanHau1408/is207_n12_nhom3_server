@@ -25,7 +25,7 @@ class CreateOrderTable extends Migration
             $table->unsignedBigInteger('shipId');
             $table->foreign('shipId')->references('id')->on('ship_method')->onDelete('cascade');
             $table->text('noteMess');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

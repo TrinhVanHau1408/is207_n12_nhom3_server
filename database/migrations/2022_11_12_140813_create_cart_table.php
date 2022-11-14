@@ -19,7 +19,7 @@ class CreateCartTable extends Migration
             $table->foreign('customerId')->references('id')->on('customer')->onDelete('cascade');
             $table->integer('totalQuantity');
             $table->decimal('totalMoney',15,2);
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

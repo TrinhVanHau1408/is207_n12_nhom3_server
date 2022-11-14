@@ -4,15 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ReplyComment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $table = "reply_comment";
-
-    protected $attributes = [
-        'trash' => 0,
-    ]; 
     
     protected $fillable = [
         'commentId',
@@ -20,6 +17,5 @@ class ReplyComment extends Model
         'content',
         'like',
         'dislike',
-        'trash',
     ];
 }

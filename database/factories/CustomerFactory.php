@@ -22,7 +22,6 @@ class CustomerFactory extends Factory
             'email' => $this->faker->safeEmail(),
             'status' => $this->faker->randomElement(['Hoạt động', 'ngừng hoạt động']),
             'address'=> $this->faker->address(),
-            'trash' => 0,
         ];
     }
 }

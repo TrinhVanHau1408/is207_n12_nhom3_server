@@ -20,4 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::resource('blog', BlogController::class);
-Route::resource('phone', PhoneController::class);
+// Route::resource('phone', PhoneController::class);
+
+Route::controller(PhoneController::class)->group(function () {
+    Route::get('/phone', 'index');
+    Route::get('/phone/{id}', 'show');
+    Route::post('/phone', 'store');
+    Route::put('/phone/{id}', 'update');
+    Route::delete('/phone/{id}', 'update');
+});

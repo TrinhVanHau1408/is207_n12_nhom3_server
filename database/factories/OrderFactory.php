@@ -24,7 +24,6 @@ class OrderFactory extends Factory
             'paymentId' => PaymentMethod::inRandomOrder()->first()->id,
             'shipId' => ShipMethod::inRandomOrder()->first()->id,
             'noteMess' => $this->faker->paragraph() ,
-            'trash' => 0,
         ];
     }
 }

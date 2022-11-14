@@ -22,7 +22,7 @@ class CreateAddressReceiveTable extends Migration
             $table->string('addressReceiver');
             $table->string('numberApartment');
             $table->integer('defaultAddress');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

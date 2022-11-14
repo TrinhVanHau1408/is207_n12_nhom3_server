@@ -48,9 +48,6 @@ class PhoneController extends Controller
             'sim',
             'screen',
             'camera',
-            'ratingStart',
-            'viewCustomer',
-            'trash'
         ]);
 
         $phone = Phone::create($request->all());
@@ -70,7 +67,8 @@ class PhoneController extends Controller
      */
     public function show($id)
     {
-        //
+        $phone = Phone::find($id);
+        return response()->json($phone);
     }
 
     /**
@@ -93,7 +91,59 @@ class PhoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name',
+            'categoryId',
+            'imgUrl',
+            'quantity',
+            'priceSale',
+            'description',
+            'ramId',
+            'romId',
+            'colorId',
+            'sim',
+            'screen',
+            'camera',
+        ]);
+
+        $phone = Phone::find($id);
+
+        if (!$phone) return [
+            "status" => 0,
+            "msg" => "Blog update failure"
+        ];
+
+        $phone->name = $request->name;
+        $phone->categoryId = $request->categoryId;
+        $phone->imgUrl = $request->imgUrl;
+        $phone->quantity = $request->quantity;
+        $phone->priceSale = $request->priceSale;
+        $phone->description = $request->description;
+        $phone->ramId = $request->ramId;
+        $phone->romId = $request->romId;
+        $phone->colorId = $request->colorId;
+        $phone->sim = $request->sim;
+        $phone->screen = $request->screen;
+        $phone->camera = $request->camera;
+
+        $phone->save();
+
+        return [
+            "status" => 1,
+            "data" => $phone,
+            "msg" => "Blog updated successfully"
+        ];
+    }
+
+     /**
+     * Soft Delete the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $phone = Phone::find($id);
     }
 
     /**

@@ -21,7 +21,7 @@ class CreateCartItemTable extends Migration
             $table->foreign('phoneId')->references('id')->on('phone')->onDelete('cascade');
             $table->integer('quantity');
             $table->decimal('totalMoney',15,2);
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

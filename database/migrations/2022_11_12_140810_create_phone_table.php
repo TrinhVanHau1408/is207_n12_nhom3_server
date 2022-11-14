@@ -33,7 +33,7 @@ class CreatePhoneTable extends Migration
             $table->string('camera');
             $table->integer('ratingStart');
             $table->integer('viewCustomer');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

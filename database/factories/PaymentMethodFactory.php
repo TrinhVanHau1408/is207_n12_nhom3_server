@@ -15,7 +15,6 @@ class PaymentMethodFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->numerify('Payment-####'),
-            'trash' => 0,
         ];
     }
 }

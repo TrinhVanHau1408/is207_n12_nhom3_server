@@ -17,7 +17,7 @@ class CreateRomTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('percentPrice');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

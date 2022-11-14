@@ -20,7 +20,6 @@ class CartItemFactory extends Factory
             'phoneId'=> Phone::inRandomOrder()->first()->id,
             'quantity' => $this->faker->randomElement([2, 3, 5]),
             'totalMoney' => $this->faker->randomElement([2000000, 30000000, 50000000]),
-            'trash' => 0,
         ];
     }
 }

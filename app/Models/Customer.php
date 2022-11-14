@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $table = "customer";
-    protected $attributes = [
-        'trash' => 0,
-    ];
-    
+   
     protected $fillable = [
         'userName',
         'password',
@@ -22,6 +20,5 @@ class Customer extends Model
         'email',
         'status',
         'address',
-        'trash'
     ];
 }

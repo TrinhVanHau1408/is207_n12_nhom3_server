@@ -4,22 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderItem extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     
     public $table = "order_item";
 
-    protected $attributes = [
-        'trash' => 0,
-    ];
     protected $fillable = [
         'orderId',
         'phoneId',
         'quantity',
         'priceSale',
         'totalPrice',
-        'trash'
     ];
 }

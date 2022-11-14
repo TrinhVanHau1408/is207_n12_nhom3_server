@@ -21,7 +21,6 @@ class ReplyCommentFactory extends Factory
             'content' =>  $this->faker->paragraph(),
             'like' => 3,
             'dislike' => 2,
-            'trash' => 0,
         ];
     }
 }

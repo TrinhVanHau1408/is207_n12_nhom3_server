@@ -18,7 +18,7 @@ class CreateShipMethodTable extends Migration
             $table->string('name');
             $table->decimal('feePrice',15,2);
             $table->timestamp('deliveryTime');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -24,7 +24,6 @@ class PhoneFactory extends Factory
         ];
         return [
             'name' => $this->faker->unique()->numerify('Điện thoại-####'),
-            // 'categoryId' => $this->faker->randomElement([29, 30, 31]),
             'categoryId' => Category::inRandomOrder()->first()->id,
             'imgUrl' => $this->faker->randomElement($imgArr),
             'quantity'=> $this->faker->randomElement([20, 50]),
@@ -38,7 +37,6 @@ class PhoneFactory extends Factory
             'camera'=> $this->faker->randomElement(['Camera 1', 'Camera 2']),
             'ratingStart' => $this->faker->randomElement([1, 2, 3, 4, 5]),
             'viewCustomer' => $this->faker->randomElement([10, 20, 30, 40, 50]),
-            'trash'=> 0,
         ];
     }
 }

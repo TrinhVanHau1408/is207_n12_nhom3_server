@@ -22,7 +22,7 @@ class CreateCommentTable extends Migration
             $table->text('content');
             $table->integer('like');
             $table->integer('dislike');
-            $table->integer('trash');
+            $table->softDeletes();
             $table->timestamps();
 
         });
