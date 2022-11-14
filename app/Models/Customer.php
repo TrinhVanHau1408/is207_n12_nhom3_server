@@ -9,6 +9,10 @@ class Customer extends Model
 {
     use HasFactory;
     public $table = "customer";
+    protected $attributes = [
+        'trash' => 0,
+    ];
+    
     protected $fillable = [
         'userName',
         'password',

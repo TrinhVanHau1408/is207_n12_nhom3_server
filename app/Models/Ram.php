@@ -9,6 +9,11 @@ class Ram extends Model
 {
     use HasFactory;
     public $table = "ram";
+
+    protected $attributes = [
+        'trash' => 0,
+    ]; 
+    
     protected $fillable = [
         'name',
         'percentPrice',

@@ -9,6 +9,11 @@ class Rom extends Model
 {
     use HasFactory;
     public $table = "rom";
+
+    protected $attributes = [
+        'trash' => 0,
+    ]; 
+    
     protected $fillable = [
         'name',
         'percentPrice',

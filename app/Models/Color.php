@@ -9,6 +9,11 @@ class Color extends Model
 {
     use HasFactory;
     public $table = "color";
+    
+    protected $attributes = [
+        'trash' => 0,
+    ];
+
     protected $fillable = [
         'name',
         'percentPrice',

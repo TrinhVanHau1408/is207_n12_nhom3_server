@@ -20,6 +20,13 @@ class Comment extends Model
     // $table->timestamps();
 
     public $table = "comment";
+
+    protected $attributes = [
+        'trash' => 0,
+        'like' => 0,
+        'dislike' => 0,
+    ];
+
     protected $fillable = [
         'customerId',
         'phoneId',

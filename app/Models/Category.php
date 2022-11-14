@@ -9,7 +9,13 @@ class Category extends Model
 {
     use HasFactory;
     public $table = "category";
+    
+    protected $attributes = [
+        'trash' => 0,
+    ];
+
     protected $fillable = [
         'name',
+        'trash',
     ];
 }

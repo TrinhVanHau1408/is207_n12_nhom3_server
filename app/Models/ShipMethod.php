@@ -9,6 +9,11 @@ class ShipMethod extends Model
 {
     use HasFactory;
     public $table = "ship_method";
+
+    protected $attributes = [
+        'trash' => 0,
+    ]; 
+    
     protected $fillable = [
         'name',
         'feePrice',

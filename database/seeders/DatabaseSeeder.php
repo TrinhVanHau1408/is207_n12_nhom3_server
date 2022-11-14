@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
           
         $this->call([
-            // ColorSeed::class,
-            // RamSeed::class,
-            // RomSeed::class,
-            // CategorySeed::class,
-            // PhoneSeed::class,
-            // CustomerSeed::class,
-            // CartSeed::class,
-            // CartItemSeed::class,
+            ColorSeed::class,
+            RamSeed::class,
+            RomSeed::class,
+            CategorySeed::class,
+            PhoneSeed::class,
+            CustomerSeed::class,
+            CartSeed::class,
+            CartItemSeed::class,
             ShipMethodSeed::class,
             PaymentMethodSeed::class,
             OrderSeed::class,

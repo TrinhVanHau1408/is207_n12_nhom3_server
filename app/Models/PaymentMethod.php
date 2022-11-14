@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use HasFactory;
-    // $table->id();
-    // $table->string('name');
-    // $table->integer('trash');
-    // $table->timestamps();
+  
     public $table = "payment_method";
+
+    protected $attributes = [
+        'trash' => 0,
+    ]; 
+    
     protected $fillable = [
         'name',
         'trash',

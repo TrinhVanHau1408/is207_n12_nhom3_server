@@ -23,6 +23,11 @@ class Order extends Model
     // $table->timestamps();
 
     public $table = "order";
+
+    protected $attributes = [
+        'trash' => 0,
+    ];
+    
     protected $fillable = [
         'customerId',
         'orderCode',

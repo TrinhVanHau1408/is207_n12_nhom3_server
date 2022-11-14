@@ -9,6 +9,9 @@ class Cart extends Model
 {
     use HasFactory;
     public $table = "cart";
+    protected $attributes = [
+        'trash' => 0,
+    ];
     protected $fillable = [
         'customerId',
         'totalQuantity',
