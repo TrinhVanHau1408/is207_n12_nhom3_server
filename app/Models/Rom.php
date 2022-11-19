@@ -13,6 +13,5 @@ class Rom extends Model
 
     protected $fillable = [
         'name',
-        'percentPrice',
     ];
 }

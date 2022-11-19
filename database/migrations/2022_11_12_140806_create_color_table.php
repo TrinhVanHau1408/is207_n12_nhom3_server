@@ -16,7 +16,6 @@ class CreateColorTable extends Migration
         Schema::create('color', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('percentPrice');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cart;
+use App\Models\PhoneDetail;
 use Illuminate\Database\Seeder;
 
-class CartSeed extends Seeder
+class PhoneDetailSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class CartSeed extends Seeder
      */
     public function run()
     {
-        Cart::factory()->count(10)->create();
+        PhoneDetail::factory()->count(20)->create();
     }
 }

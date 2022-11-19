@@ -16,7 +16,6 @@ class CreateRamTable extends Migration
         Schema::create('ram', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('percentPrice');
             $table->softDeletes();
             $table->timestamps();
         });

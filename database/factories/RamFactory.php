@@ -15,7 +15,6 @@ class RamFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['1GB','2GB', '4GB', '5GB','6GB', '8GB']),
-            'percentPrice' =>$this->faker->randomElement([1,2, 4, 5, 6, 10]),
         ];
     }
 }

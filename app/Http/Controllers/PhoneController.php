@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Phone;
+use App\Models\PhoneDetail;
 use Illuminate\Http\Request;
+
 
 class PhoneController extends Controller
 {
@@ -13,8 +15,10 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        $phones = Phone::all();
-        return response()->json( $phones);
+        
+        $phones = Phone::All();
+
+        return response()->json(  $phones);
     }
 
     /**
@@ -42,19 +46,51 @@ class PhoneController extends Controller
             'quantity',
             'priceSale',
             'description',
-            'ramId',
-            'romId',
-            'colorId',
+            'variants',
             'sim',
             'screen',
             'camera',
         ]);
 
-        $phone = Phone::create($request->all());
+        $phoneData = $request->json('data');
+        // if (!Phone::where('name', $phoneData['name'] )) {
+        //     return [
+        //         "status" => 0,
+        //         "msg" => "Insert phone failure, ". $phoneData['name'] ." already exist!"
+        //     ];
+        // };
+
+        $phone = Phone::insert([
+            'name' => $phoneData['name'],
+            'categoryId' => $phoneData['categoryId'],
+            'imgUrl' => $phoneData['imgUrl'],
+            'quantity' => $phoneData['quantity'],
+            'priceSale' => $phoneData['priceSale'],
+            'description' => $phoneData['description'],
+            'sim' => $phoneData['sim'],
+            'screen' => $phoneData['screen'],
+            'camera'=> $phoneData['camera'],
+            'ratingStart' => 0,
+            'viewCustomer' =>0
+        ]);
+
+        $phoneCurrId = Phone::max('id');
+        $variants = $phoneData['variants'];
+        if(!empty($variants)) {
+            foreach ($variants as $key => $variant) {
+                PhoneDetail::insert([
+                    'phoneId' =>  $phoneCurrId,
+                    'ramId' =>  $variant['ramId'],
+                    'romId' => $variant['romId'],
+                    'colorId' => $variant['colorId'],
+                    'percentPrice' => $variant['percentPrice']
+                ]);
+            };
+        };
 
         return [
             "status" => 1,
-            "data" => $phone,
+            "data" => $phoneCurrId,
 
         ];
     }
@@ -68,7 +104,17 @@ class PhoneController extends Controller
     public function show($id)
     {
         $phone = Phone::find($id);
-        return response()->json($phone);
+        $phoneVariant = PhoneDetail::where('phoneId', '=',$id)
+        ->leftJoin('ram', 'ram.id' ,'=', 'phone_detail.ramId')
+        ->leftJoin('rom', 'rom.id' ,'=', 'phone_detail.romId')
+        ->leftJoin('color', 'color.id' ,'=', 'phone_detail.colorId')
+        ->select('phone_detail.*', 'ram.name as ram', 'rom.name as rom', 'color.name as color')
+        ->whereNull('phone_detail.deleted_at')
+        ->whereNull('ram.deleted_at')
+        ->whereNull('rom.deleted_at')
+        ->whereNull('color.deleted_at')
+        ->get();
+        return response()->json(['phone' =>$phone, 'variants' => $phoneVariant]);
     }
 
     /**
@@ -89,8 +135,12 @@ class PhoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     /*Sẽ build tiếp khi có giao diện */
     public function update(Request $request, $id)
     {
+       
+       
         $request->validate([
             'name',
             'categoryId',
@@ -98,42 +148,104 @@ class PhoneController extends Controller
             'quantity',
             'priceSale',
             'description',
-            'ramId',
-            'romId',
-            'colorId',
+            'variants',
             'sim',
             'screen',
             'camera',
         ]);
 
+        $phoneData = $request->json('data');
+
         $phone = Phone::find($id);
 
-        if (!$phone) return [
-            "status" => 0,
-            "msg" => "Blog update failure"
-        ];
-
-        $phone->name = $request->name;
-        $phone->categoryId = $request->categoryId;
-        $phone->imgUrl = $request->imgUrl;
-        $phone->quantity = $request->quantity;
-        $phone->priceSale = $request->priceSale;
-        $phone->description = $request->description;
-        $phone->ramId = $request->ramId;
-        $phone->romId = $request->romId;
-        $phone->colorId = $request->colorId;
-        $phone->sim = $request->sim;
-        $phone->screen = $request->screen;
-        $phone->camera = $request->camera;
+        $phone->name = $phoneData['name'];
+        $phone->categoryId = $phoneData['categoryId'];
+        $phone->imgUrl = $phoneData['imgUrl'];
+        $phone->quantity = $phoneData['quantity'];
+        $phone->priceSale = $phoneData['priceSale'];
+        $phone->description = $phoneData['description'];
+        $phone->sim = $phoneData['sim'];
+        $phone->screen = $phoneData['screen'];
+        $phone->camera = $phoneData['camera'];
 
         $phone->save();
 
+
+
+        /*Update Variants =>[phoneDetailId, ramId, romId, colorId, percentPrice]
+        
+        /*Update biến thể sản phẩm */
+        foreach ($phoneData['variants'] as $key => $variant) {
+            $phoneDetailId=(int)$variant['phoneDetailId'];
+            $phoneDetail=PhoneDetail::find($phoneDetailId);
+            $phoneDetail->ramId = (int)$variant['ramId'];
+            $phoneDetail->romId = (int)$variant['romId'];
+            $phoneDetail->colorId = (int)$variant['colorId'];
+            $phoneDetail->percentPrice = (int)$variant['percentPrice'];
+            $phoneDetail->save();
+        }
+          
+
+        // }
+        // $str = $request->array;
+        // $arr = explode(';', $str);
+        // foreach ( $arr as $key => $value) {
+        //     $a= explode(',',$value);
+        //     foreach ( $a as $k => $v) {
+        //        $variant = PhoneDetail::where('id', $id);
+        //     }
+
+        // };
+
+
+
         return [
             "status" => 1,
-            "data" => $phone,
             "msg" => "Blog updated successfully"
         ];
     }
+
+     /**
+     * Search anything field resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // $phone = Phone::find($id)->delete();
+        // $request->validate(['search']);
+
+        $search = $request->search;
+        return [
+            "status" => is_array($search),
+            "msg" => "Search does not exist"
+        ];
+        $phone=Phone::select('phone.*')
+            ->leftJoin('phone_detail', 'phone_detail.phoneId', '=', 'phone.id')
+            ->orWhere('phone.name','LIKE','%'.$search.'%')
+            ->orWhere('description','LIKE','%'.$search.'%')
+            ->leftJoin('ram', 'ram.id', '=', 'phone_detail.ramId')
+            ->leftJoin('rom', 'rom.id', '=', 'phone_detail.romId')
+            ->leftJoin('color', 'color.id', '=', 'phone_detail.colorId')
+            ->orWhere('color.name','LIKE','%'.$search.'%')
+            ->orWhere('ram.name','LIKE','%'.$search.'%')
+            ->orWhere('rom.name','LIKE','%'.$search.'%')
+            ->distinct()
+            ->get();
+
+        if (!empty($phone)) return [
+            "status" => 0,
+            "msg" => "Search does not exist"
+        ];
+
+        return [
+            "status" => 1,
+            'data' =>$phone ,
+            "msg" => "Search anything successfully"
+        ];
+    }
+
 
      /**
      * Soft Delete the specified resource from storage.
@@ -143,7 +255,45 @@ class PhoneController extends Controller
      */
     public function delete($id)
     {
-        $phone = Phone::find($id);
+        $phone = Phone::find($id)->delete();
+
+        return [
+            "status" => 1,
+            "data" =>  $phone,
+            "msg" => "Phone soft delete successfully"
+        ];
+    }
+
+     /**
+     * Restore one the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        Phone::withTrashed()->find($id)->restore();
+
+        return [
+            "status" => 1,
+            "msg" => "Restore one successfully"
+        ];
+    }
+
+     /**
+     * Restore one the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restoreAll()
+    {
+        Phone::onlyTrashed()->restore();
+
+        return [
+            "status" => 1,
+            "msg" => "Restore all successfully"
+        ];
     }
 
     /**

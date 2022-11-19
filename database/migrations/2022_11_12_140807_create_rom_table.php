@@ -16,7 +16,6 @@ class CreateRomTable extends Migration
         Schema::create('rom', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('percentPrice');
             $table->softDeletes();
             $table->timestamps();
         });

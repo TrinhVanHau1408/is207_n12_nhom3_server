@@ -13,6 +13,5 @@ class Ram extends Model
 
     protected $fillable = [
         'name',
-        'percentPrice',
     ];
 }

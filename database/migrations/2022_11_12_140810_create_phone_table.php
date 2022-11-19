@@ -22,12 +22,6 @@ class CreatePhoneTable extends Migration
             $table->integer('quantity');
             $table->decimal('priceSale', 15, 2);
             $table->text('description');
-            $table->unsignedBigInteger('ramId');
-            $table->foreign('ramId')->references('id')->on('ram')->onDelete('cascade');
-            $table->unsignedBigInteger('romId');
-            $table->foreign('romId')->references('id')->on('rom')->onDelete('cascade');
-            $table->unsignedBigInteger('colorId');
-            $table->foreign('colorId')->references('id')->on('color')->onDelete('cascade');
             $table->string('sim');
             $table->string('screen');
             $table->string('camera');

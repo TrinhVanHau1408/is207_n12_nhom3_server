@@ -15,7 +15,6 @@ class RomFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['4GB', '6GB', '8GB', '10GB', '12GB']),
-            'percentPrice' =>$this->faker->randomElement([2, 5, 10, 15, 20, 30]),
         ];
     }
 }

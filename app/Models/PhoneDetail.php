@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cart extends Model
+class PhoneDetail extends Model
 {
+   
     use HasFactory, SoftDeletes;
-    public $table = "cart";
-    
+    public $table = "phone_detail";
     protected $fillable = [
-        'customerId',
-        'totalQuantity',
-        'totalMoney',
+        'phoneId',
+        'ramId',
+        'romId',
+        'colorId',
+        'percentPrice',
     ];
 }

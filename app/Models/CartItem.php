@@ -13,7 +13,7 @@ class CartItem extends Model
     public $table = "cart_item";
 
     protected $fillable = [
-        'cartId',
+        'customerId',
         'phoneId',
         'quantity',
         'totalMoney',
