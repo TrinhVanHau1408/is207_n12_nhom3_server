@@ -17,8 +17,9 @@ class CreateCartItemTable extends Migration
             $table->id();
             $table->unsignedBigInteger('customerId');
             $table->foreign('customerId')->references('id')->on('customer')->onDelete('cascade');
-            $table->unsignedBigInteger('phoneId');
-            $table->foreign('phoneId')->references('id')->on('phone')->onDelete('cascade');
+            $table->string('phoneName');
+            $table->unsignedBigInteger('phoneDetailId');
+            $table->foreign('phoneDetailId')->references('id')->on('phone_detail')->onDelete('cascade');
             $table->integer('quantity');
             $table->decimal('priceSale',15,2);
             $table->decimal('totalMoney',15,2);

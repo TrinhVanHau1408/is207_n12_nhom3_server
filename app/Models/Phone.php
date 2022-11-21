@@ -18,7 +18,6 @@ class Phone extends Model
         'name',
         'categoryId',
         'imgUrl',
-        'quantity',
         'priceSale',
         'description',
         'sim',

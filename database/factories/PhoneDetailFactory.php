@@ -22,6 +22,7 @@ class PhoneDetailFactory extends Factory
             'ramId' => Ram::inRandomOrder()->first()->id,
             'romId' => Rom::inRandomOrder()->first()->id,
             'colorId' => Color::inRandomOrder()->first()->id,
+            'quantity'=> $this->faker->randomElement([20, 50]),
             'percentPrice' =>$this->faker->randomElement([2, 5, 10]),
         ];
     }

@@ -18,12 +18,14 @@ class CreateOrderTable extends Migration
             $table->unsignedBigInteger('customerId');
             $table->foreign('customerId')->references('id')->on('customer')->onDelete('cascade');
             $table->text('orderCode');
-            $table->integer('totalQuantity');
-            $table->decimal('totalPrice',15,2);
             $table->unsignedBigInteger('paymentId');
             $table->foreign('paymentId')->references('id')->on('payment_method');
             $table->unsignedBigInteger('shipId');
             $table->foreign('shipId')->references('id')->on('ship_method')->onDelete('cascade');
+            $table->unsignedBigInteger('addressReceiveId');
+            $table->foreign('addressReceiveId')->references('id')->on('address_receive')->onDelete('cascade');
+            $table->unsignedBigInteger('statusId');
+            $table->foreign('statusId')->references('id')->on('status')->onDelete('cascade');
             $table->text('noteMess');
             $table->softDeletes();
             $table->timestamps();

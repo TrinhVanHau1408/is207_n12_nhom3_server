@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\OrderItem;
+use App\Models\Status;
 use Illuminate\Database\Seeder;
 
-class OrderItemSeed extends Seeder
+class StatusSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class OrderItemSeed extends Seeder
      */
     public function run()
     {
-        OrderItem::factory()->count(30)->create();
+        Status::factory()->count(5)->create();
     }
 }

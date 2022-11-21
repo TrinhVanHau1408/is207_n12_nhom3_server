@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PhoneDetail extends Model
+class AddressReceive extends Model
 {
-   
     use HasFactory, SoftDeletes;
-    public $table = "phone_detail";
+    
+    public $table = "address_receive";
+
     protected $fillable = [
-        'phoneId',
-        'ramId',
-        'romId',
-        'quantity',
-        'colorId',
-        'percentPrice',
+        'customerId',
+        'nameReceiver',
+        'numberPhoneReceiver',
+        'addressReceiver',
+        'numberApartment',
+        'defaultAddress',
     ];
 }

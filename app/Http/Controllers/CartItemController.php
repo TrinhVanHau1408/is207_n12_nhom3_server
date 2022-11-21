@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\CartItem;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class CartItemController extends Controller
@@ -43,11 +44,41 @@ class CartItemController extends Controller
             'item'
         ]);
  
-        $cartItem = CartItem::create($request->json()->all());
+        $customerId = $request->json('customerId');
+        $item =  $request->json('item');
+        $phoneId = $item['phoneId'];
+        $phoneDetailId = $item['phoneDetailId'];
+        $quantity = $item['quantity'];
+        $priceSale = $item['priceSale'];
+
+        $phone = Phone::find($phoneId);
+        $cartItem = CartItem::where("customerId", $customerId )->where("phoneDetailId",  $phoneDetailId)->first();
+       
+        // Kiểm tra CartItem đã có chưa
+        // / -> Nếu chưa thì tạo mới một CartItem
+        // / -> Nếu có thì cập nhật quantity
+        if (!$cartItem) {
+            $cartItem = CartItem::create([
+                "customerId" => $customerId,
+                "phoneName" => $phone->name,
+                "phoneDetailId" => $phoneDetailId,
+                "quantity" => $quantity,
+                "priceSale" => $priceSale,
+                "totalMoney" => $quantity *$priceSale
+            ]);
+        } else {
+
+            $cartItem->quantity = $cartItem->quantity + $quantity;
+            $cartItem->priceSale = $priceSale;
+            $cartItem->totalMoney = $cartItem->quantity * $priceSale;
+
+            $cartItem->save();
+        }
       
         return [
             "status" => 1,
-            "data" => $cartItem
+            "data" =>  $cartItem,
+            "msg" => "Cart item store successfully"
         ];
     }
 
@@ -59,7 +90,7 @@ class CartItemController extends Controller
      */
     public function show($id)
     {
-        $cartItem = CartItem::find($id);
+        $cartItem = CartItem::where("customerId", "=", $id)->get();
         return [
             "status" => 1,
             "data" =>$cartItem
@@ -87,18 +118,32 @@ class CartItemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'
+            "customerId",
+            "item"
         ]);
 
+        // $customerId = $request->json('customerId');
+        $item =  $request->json('item');
+        // $phoneId = $item['phoneId'];
+        // $phoneDetailId = $item['phoneDetailId'];
+        $quantity = $item['quantity'];
+        $priceSale = $item['priceSale'];
+
         $cartItem = CartItem::find($id);
+        if ($quantity<=0) {
+            $cartItem->forceDelete();
+        } else {
+            $cartItem->quantity = $quantity;
+            $cartItem->priceSale = $priceSale;
+            $cartItem->totalMoney = $cartItem->quantity * $priceSale;
 
-        $cartItem->name = $request->json("name");
-
-        $cartItem->save();
+            $cartItem->save();
+        }
 
         return [
             "status" => 1,
-            "data" =>$cartItem
+            "data" =>$cartItem,
+            "msg" => "Cart item update successfully"
         ];
  
     }
@@ -111,46 +156,46 @@ class CartItemController extends Controller
      */
     public function delete($id)
     {
-        $cartItem = CartItem::find($id)->delete();
+        $cartItem = CartItem::find($id)->forceDelete();
 
         return [
             "status" => 1,
             "data" =>  $cartItem,
-            "msg" => "Phone soft delete successfully"
+            "msg" => "Cart item delete successfully"
         ];
     }
 
-     /**
-     * Restore one the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restore($id)
-    {
-        CartItem::withTrashed()->find($id)->restore();
+    //  /**
+    //  * Restore one the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function restore($id)
+    // {
+    //     CartItem::withTrashed()->find($id)->restore();
 
-        return [
-            "status" => 1,
-            "msg" => "Restore one successfully"
-        ];
-    }
+    //     return [
+    //         "status" => 1,
+    //         "msg" => "Restore one successfully"
+    //     ];
+    // }
 
-     /**
-     * Restore one the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function restoreAll()
-    {
-        CartItem::onlyTrashed()->restore();
+    //  /**
+    //  * Restore one the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function restoreAll()
+    // {
+    //     CartItem::onlyTrashed()->restore();
 
-        return [
-            "status" => 1,
-            "msg" => "Restore all successfully"
-        ];
-    }
+    //     return [
+    //         "status" => 1,
+    //         "msg" => "Restore all successfully"
+    //     ];
+    // }
 
     /**
      * Remove the specified resource from storage.

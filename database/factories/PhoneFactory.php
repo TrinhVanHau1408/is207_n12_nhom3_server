@@ -26,7 +26,6 @@ class PhoneFactory extends Factory
             'name' => $this->faker->unique()->numerify('Điện thoại-####'),
             'categoryId' => Category::inRandomOrder()->first()->id,
             'imgUrl' => $this->faker->randomElement($imgArr),
-            'quantity'=> $this->faker->randomElement([20, 50]),
             'priceSale'=> $this->faker->randomElement([50000, 75000]),
             'description' => $this->faker->paragraph(),
             'sim'=> $this->faker->randomElement(['Sim 1', 'Sim 2']),

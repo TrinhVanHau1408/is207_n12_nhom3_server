@@ -19,7 +19,6 @@ class CreatePhoneTable extends Migration
             $table->unsignedBigInteger('categoryId');
             $table->foreign('categoryId')->references('id')->on('category')->onDelete('cascade');
             $table->string('imgUrl');
-            $table->integer('quantity');
             $table->decimal('priceSale', 15, 2);
             $table->text('description');
             $table->string('sim');

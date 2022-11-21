@@ -23,6 +23,7 @@ class CratePhoneDetailTable extends Migration
             $table->foreign('romId')->references('id')->on('rom')->onDelete('cascade');
             $table->unsignedBigInteger('colorId');
             $table->foreign('colorId')->references('id')->on('color')->onDelete('cascade');
+            $table->integer('quantity');
             $table->integer('percentPrice');
             $table->softDeletes();
             $table->timestamps();

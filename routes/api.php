@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ColorCotroller;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\PhoneDetailController;
@@ -123,26 +124,20 @@ Route::controller(PaymentMethodController::class)->group(function () {
 
 // CartItem API
 Route::controller(CartItemController::class)->group(function () {
-    Route::get('/cartItem', 'index');
-    Route::get('/cartItem/{id}', 'show');
-    Route::get('/cartItem/{id}/restore', 'restore');
-    Route::get('/cartItem/restore', 'restoreAll');
-    Route::post('/cartItem', 'store');
-    Route::post('/cartItem/search', 'search');
-    Route::post('/cartItem/delete/{id}', 'delete');
-    Route::put('/cartItem/{id}', 'update');
-    // Route::delete('/phone/{id}', 'update');
+    Route::get('/cart', 'index');
+    Route::get('/cart/customer/{id}', 'show');
+    Route::post('/cart', 'store');
+    Route::delete('/cart/delete/{id}', 'delete');
+    Route::put('/cart/{id}', 'update');
 });
 
-// Payment API
-Route::controller(CartController::class)->group(function () {
-    Route::get('/cart', 'index');
-    Route::get('/cart/{id}', 'show');
-    Route::get('/cart/{id}/restore', 'restore');
-    Route::get('/cart/restore', 'restoreAll');
-    Route::post('/cart', 'store');
-    Route::post('/cart/search', 'search');
-    Route::post('/cart/delete/{id}', 'delete');
-    Route::put('/cart/{id}', 'update');
-    // Route::delete('/phone/{id}', 'update');
+
+// Order API
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/order', 'index');
+    Route::get('/order/{id}', 'show');
+    Route::post('/order', 'store');
+    Route::put('/order/{id}', 'update');
+    Route::delete('/order/{id}', 'destroy');
 });
+

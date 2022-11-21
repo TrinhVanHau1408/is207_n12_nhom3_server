@@ -14,9 +14,10 @@ class OrderItem extends Model
 
     protected $fillable = [
         'orderId',
-        'phoneId',
+        'phoneName',
+        'phoneDetailId',
         'quantity',
         'priceSale',
-        'totalPrice',
+        'totalMoney',
     ];
 }

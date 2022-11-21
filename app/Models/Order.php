@@ -15,10 +15,10 @@ class Order extends Model
     protected $fillable = [
         'customerId',
         'orderCode',
-        'totalQuantity',
-        'totalPrice',
         'paymentId',
         'shipId',
+        'addressReceiveId',
+        'statusId',
         'noteMess',
     ];
     

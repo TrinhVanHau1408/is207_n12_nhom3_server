@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\AddressReceive;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
 use App\Models\ShipMethod;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
@@ -19,10 +21,10 @@ class OrderFactory extends Factory
         return [
             'customerId' => Customer::inRandomOrder()->first()->id,
             'orderCode' => $this->faker->unique()->numerify('MK-####'),
-            'totalQuantity' => $this->faker->randomElement([2, 3, 5]),
-            'totalPrice' => $this->faker->randomElement([2000000, 30000000, 50000000]),
             'paymentId' => PaymentMethod::inRandomOrder()->first()->id,
             'shipId' => ShipMethod::inRandomOrder()->first()->id,
+            'addressReceiveId' => AddressReceive::inRandomOrder()->first()->id,
+            'statusId' => Status::inRandomOrder()->first()->id,
             'noteMess' => $this->faker->paragraph() ,
         ];
     }
