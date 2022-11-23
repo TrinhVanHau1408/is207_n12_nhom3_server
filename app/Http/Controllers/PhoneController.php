@@ -18,7 +18,7 @@ class PhoneController extends Controller
         
         $phones = Phone::All();
 
-        return response()->json(  $phones);
+        return response()->json($phones);
     }
 
     /**
@@ -83,6 +83,7 @@ class PhoneController extends Controller
                     'ramId' =>  $variant['ramId'],
                     'romId' => $variant['romId'],
                     'colorId' => $variant['colorId'],
+                    'quantity' => $variant['quantity'],
                     'percentPrice' => $variant['percentPrice']
                 ]);
             };
@@ -108,7 +109,7 @@ class PhoneController extends Controller
         ->leftJoin('ram', 'ram.id' ,'=', 'phone_detail.ramId')
         ->leftJoin('rom', 'rom.id' ,'=', 'phone_detail.romId')
         ->leftJoin('color', 'color.id' ,'=', 'phone_detail.colorId')
-        ->select('phone_detail.*', 'ram.name as ram', 'rom.name as rom', 'color.name as color')
+        ->select('phone_detail.*', 'ram.name as ram', 'rom.name as rom', 'color.name as color','quantity','percentPrice')
         ->whereNull('phone_detail.deleted_at')
         ->whereNull('ram.deleted_at')
         ->whereNull('rom.deleted_at')
