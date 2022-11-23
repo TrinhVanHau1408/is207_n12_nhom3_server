@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ColorCotroller;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PhoneController;
@@ -141,3 +142,17 @@ Route::controller(OrderController::class)->group(function () {
     Route::delete('/order/{id}', 'destroy');
 });
 
+
+
+// Customer API
+Route::controller(CustomerController::class)->group(function () {
+    Route::get('/customer', 'index');
+    Route::get('/customer/{id}', 'show');
+    Route::get('/customer/{id}/restore', 'restore');
+    Route::get('/customer/restore', 'restoreAll');
+    Route::post('/customer', 'store');
+    Route::post('/customer/search', 'search');
+    Route::post('/customer/delete/{id}', 'delete');
+    Route::put('/customer/{id}', 'update');
+    // Route::delete('/phone/{id}', 'update');
+});
