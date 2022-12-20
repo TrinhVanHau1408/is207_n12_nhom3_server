@@ -16,6 +16,7 @@ class Phone extends Model
     ];
     protected $fillable = [
         'name',
+        'slug',
         'categoryId',
         'imgUrl',
         'priceSale',

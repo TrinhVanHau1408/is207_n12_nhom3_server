@@ -102,10 +102,10 @@ class PhoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $phone = Phone::find($id);
-        $phoneVariant = PhoneDetail::where('phoneId', '=',$id)
+        $phone = Phone::where('slug', '=', $slug)->first();
+        $phoneVariant = PhoneDetail::where('phoneId', '=',$phone->id)
         ->leftJoin('ram', 'ram.id' ,'=', 'phone_detail.ramId')
         ->leftJoin('rom', 'rom.id' ,'=', 'phone_detail.romId')
         ->leftJoin('color', 'color.id' ,'=', 'phone_detail.colorId')

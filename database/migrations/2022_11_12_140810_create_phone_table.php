@@ -16,6 +16,7 @@ class CreatePhoneTable extends Migration
         Schema::create('phone', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('categoryId');
             $table->foreign('categoryId')->references('id')->on('category')->onDelete('cascade');
             $table->string('imgUrl');

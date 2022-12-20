@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use App\Models\Color;
-use App\Models\Ram;
-use App\Models\Rom;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PhoneFactory extends Factory
 {
@@ -22,8 +20,12 @@ class PhoneFactory extends Factory
             'https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-1-2-org.jpg', 
             'https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-do-1-1-1-org.jpg',
         ];
+
+        $name = $this->faker->unique()->numerify('Điện thoại-####');
+        $slug = Str::slug($name, '-');
         return [
-            'name' => $this->faker->unique()->numerify('Điện thoại-####'),
+            'name' =>$name,
+            'slug' => $slug,
             'categoryId' => Category::inRandomOrder()->first()->id,
             'imgUrl' => $this->faker->randomElement($imgArr),
             'priceSale'=> $this->faker->randomElement([50000, 75000]),
