@@ -93,7 +93,7 @@ class CartItemController extends Controller
         $cartItem = CartItem::where("customerId", "=", $id)->get();
         return [
             "status" => 1,
-            "data" =>$cartItem
+            "cart" =>$cartItem
         ];
     }
 

@@ -44,7 +44,6 @@ class ShipMethodController extends Controller
         $ship = ShipMethod::create($request->json()->all());
       
         return [
-            "status" => 1,
             "data" => $ship
         ];
     }

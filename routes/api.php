@@ -151,6 +151,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer/{id}/restore', 'restore');
     Route::get('/customer/restore', 'restoreAll');
     Route::post('/customer', 'store');
+    Route::post('/customer/login', 'login');
     Route::post('/customer/search', 'search');
     Route::post('/customer/delete/{id}', 'delete');
     Route::put('/customer/{id}', 'update');

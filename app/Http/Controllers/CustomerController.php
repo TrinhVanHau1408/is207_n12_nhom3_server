@@ -79,6 +79,22 @@ class CustomerController extends Controller
         ];
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'userName',
+            'password'
+        ]);
+
+        $userName = $request->json("userName");
+        $password = $request->json("password");
+        $customer = Customer::where("userName", "=",$userName)->where("password", "=",$password)->first();
+
+        return [
+            "customer" =>  $customer
+        ];
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
