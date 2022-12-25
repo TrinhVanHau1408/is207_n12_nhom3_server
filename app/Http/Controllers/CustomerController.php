@@ -107,33 +107,48 @@ class CustomerController extends Controller
         $userName = $request->json("userName");
         $email = $request->json("email");
         $phone = $request->json("phone");
-        // $password = $request->json("password");
+        $password = $request->json("password");
 
 
-        $isCheckUserName = Customer::where("userName", "=",$userName)->count();
-        $isCheckEmail = Customer::where("email", "=",$email)->count();
-        $isCheckPhone = Customer::where("phone", "=",$phone)->count();
+        $isCheckUserName = Customer::where("userName", "=", $userName)->count();
+        $isCheckEmail = Customer::where("email", "=", $email)->count();
+        $isCheckPhone = Customer::where("phoneNumber", "=", $phone)->count();
 
-        // $error = array();
-        // if ($isCheckUserName || $isCheckEmail || $isCheckPhone) {
-        //     if ($isCheckUserName) array_push($error, 'User name đã tồn tại!');
-        //     if ($isCheckUserName) array_push($error, 'Email đã tồn tại!');
-        //     if ($isCheckPhone) array_push($error, 'Số điện thoại đã tồn tại!');
+       
+        if ($isCheckUserName || $isCheckEmail || $isCheckPhone) {
+            $error = [];
+            if ($isCheckUserName) array_push($error, 1);
+            if ($isCheckUserName) array_push($error, 2);
+            if ($isCheckPhone) array_push($error, 3);
 
-        //     return [
-        //         'status' => 0,
-        //         'error' =>  $error
-        //     ];
-        // }
+            return [
+                'status' => 0,
+                'error' =>  $error
+            ];
+        }
 
-        // $customer = Customer::create($request->json()->all());
-        // return [
-        //     "customer" =>  $customer
-        // ];
+        $customer = Customer::create(
+            [
+                'userName' => $userName,
+                'password' => $password,
+                'name' => '',
+                'gender' => '',
+                'phoneNumber' => $phone,
+                'email' => $email,
+                'status' => '',
+                'address' => ''
+            ]
 
-         return [
-            "isCheckUserName" =>  $isCheckUserName
+        );
+
+      
+        return [
+            "customer" =>  $customer
         ];
+
+        //  return [
+        //     "isCheckUserName" =>  $isCheckUserName
+        // ];
 
 
     }
