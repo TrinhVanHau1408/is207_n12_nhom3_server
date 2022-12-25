@@ -218,24 +218,23 @@ class PhoneController extends Controller
         // $request->validate(['search']);
 
         $search = $request->search;
-        return [
-            "status" => is_array($search),
-            "msg" => "Search does not exist"
-        ];
-        $phone=Phone::select('phone.*')
-            ->leftJoin('phone_detail', 'phone_detail.phoneId', '=', 'phone.id')
-            ->orWhere('phone.name','LIKE','%'.$search.'%')
-            ->orWhere('description','LIKE','%'.$search.'%')
-            ->leftJoin('ram', 'ram.id', '=', 'phone_detail.ramId')
-            ->leftJoin('rom', 'rom.id', '=', 'phone_detail.romId')
-            ->leftJoin('color', 'color.id', '=', 'phone_detail.colorId')
-            ->orWhere('color.name','LIKE','%'.$search.'%')
-            ->orWhere('ram.name','LIKE','%'.$search.'%')
-            ->orWhere('rom.name','LIKE','%'.$search.'%')
-            ->distinct()
-            ->get();
+       
+        // $phone=Phone::select('phone.*')
+        //     ->leftJoin('phone_detail', 'phone_detail.phoneId', '=', 'phone.id')
+        //     ->orWhere('phone.name','LIKE','%'.$search.'%')
+        //     ->orWhere('description','LIKE','%'.$search.'%')
+        //     ->leftJoin('ram', 'ram.id', '=', 'phone_detail.ramId')
+        //     ->leftJoin('rom', 'rom.id', '=', 'phone_detail.romId')
+        //     ->leftJoin('color', 'color.id', '=', 'phone_detail.colorId')
+        //     ->orWhere('color.name','LIKE','%'.$search.'%')
+        //     ->orWhere('ram.name','LIKE','%'.$search.'%')
+        //     ->orWhere('rom.name','LIKE','%'.$search.'%')
+        //     ->distinct()
+        //     ->get();
 
-        if (!empty($phone)) return [
+        $phone=Phone::where('name','LIKE','%'.$search.'%')->get();
+
+        if ($phone->count()==0) return [
             "status" => 0,
             "msg" => "Search does not exist"
         ];

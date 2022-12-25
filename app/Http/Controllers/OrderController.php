@@ -145,36 +145,42 @@ class OrderController extends Controller
     public function show($id)
     {
         // $order = Order::find($id);
-        $order = Order::where('customerId','=', $id)->first();
+        // $order = Order::where('customerId','=', $id)->first();
 
-        $orderId = $order->id;
-        $paymentId = $order->paymentId;
-        $shipId = $order->shipId;
-        $addressReceiveId = $order->addressReceiveId;
-        $statusId = $order->statusId;
+        // $orderId = $order->id;
+        // $paymentId = $order->paymentId;
+        // $shipId = $order->shipId;
+        // $addressReceiveId = $order->addressReceiveId;
+        // $statusId = $order->statusId;
 
         $orderItem = OrderItem::join('order', 'order.id', '=', 'order_item.orderId')
-        ->where("orderId", "=", $orderId )
         ->where('customerId','=', $id)
         ->get();
-        $payment = PaymentMethod::where("id", "=",  $paymentId)->select("id", "name")->first();
-        $ship = ShipMethod::where("id", "=", $shipId)->select("id", "name", 'feePrice as free')->first();
-        $addresReceive = AddressReceive::where("id", "=", $addressReceiveId)->select("id", "nameReceiver", "numberPhoneReceiver", "addressReceiver", "numberApartment", "defaultAddress")->first();
-        $status = ModelsStatus::where("id", "=", $statusId)->select("id", "name")->first();
+        // $payment = PaymentMethod::where("id", "=",  $paymentId)->select("id", "name")->first();
+        // $ship = ShipMethod::where("id", "=", $shipId)->select("id", "name", 'feePrice as free')->first();
+        // $addresReceive = AddressReceive::where("id", "=", $addressReceiveId)->select("id", "nameReceiver", "numberPhoneReceiver", "addressReceiver", "numberApartment", "defaultAddress")->first();
+        // $status = ModelsStatus::where("id", "=", $statusId)->select("id", "name")->first();
         
+        // return [
+        //     "status" => 1,
+        //     "data" => [
+        //         "order" =>$order,
+        //         "detail" => [
+        //             "payment" => $payment,
+        //             "ship" => $ship,
+        //             "addresReceive" =>  $addresReceive,
+        //             "status" => $status,
+        //             "item" => $orderItem
+        //         ]
+        //     ]
+        // ];
+
         return [
             "status" => 1,
-            "data" => [
-                "order" =>$order,
-                "detail" => [
-                    "payment" => $payment,
-                    "ship" => $ship,
-                    "addresReceive" =>  $addresReceive,
-                    "status" => $status,
-                    "item" => $orderItem
-                ]
-            ]
+            "data" => $orderItem
+            
         ];
+        
         // return ["satus"=> $order];
     }
 

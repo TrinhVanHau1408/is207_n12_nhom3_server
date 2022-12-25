@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::All();
+        $status = Status::All();
 
-        return ['data'=>$category];
+        return ['data'=>$status];
     }
 
     /**
@@ -42,11 +41,11 @@ class CategoryController extends Controller
             'name'
         ]);
  
-        $category = Category::create($request->json()->all());
+        $status = Status::create($request->json()->all());
       
         return [
             "status" => 1,
-            "data" => $category
+            "data" => $status
         ];
     }
 
@@ -58,10 +57,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
+        $status = Status::find($id);
         return [
             "status" => 1,
-            "data" =>$category
+            "data" =>$status
         ];
     }
 
@@ -89,15 +88,15 @@ class CategoryController extends Controller
             'name'
         ]);
 
-        $category = Category::find($id);
+        $status = Status::find($id);
 
-        $category->name = $request->json("name");
+        $status->name = $request->json("name");
 
-        $category->save();
+        $status->save();
 
         return [
             "status" => 1,
-            "data" =>$category
+            "data" =>$status
         ];
  
     }
@@ -110,11 +109,11 @@ class CategoryController extends Controller
      */
     public function delete($id)
     {
-        $category = Category::find($id)->delete();
+        $status = Status::find($id)->delete();
 
         return [
             "status" => 1,
-            "data" =>  $category,
+            "data" =>  $status,
             "msg" => "Phone soft delete successfully"
         ];
     }
@@ -127,7 +126,7 @@ class CategoryController extends Controller
      */
     public function restore($id)
     {
-        Category::withTrashed()->find($id)->restore();
+        Status::withTrashed()->find($id)->restore();
 
         return [
             "status" => 1,
@@ -143,7 +142,7 @@ class CategoryController extends Controller
      */
     public function restoreAll()
     {
-        Category::onlyTrashed()->restore();
+        Status::onlyTrashed()->restore();
 
         return [
             "status" => 1,

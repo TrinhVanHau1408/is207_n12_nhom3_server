@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorCotroller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\PhoneDetailController;
 use App\Http\Controllers\RamController;
 use App\Http\Controllers\RomController;
 use App\Http\Controllers\ShipMethodController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -158,3 +160,30 @@ Route::controller(CustomerController::class)->group(function () {
     Route::put('/customer/{id}', 'update');
     // Route::delete('/phone/{id}', 'update');
 });
+
+// Satus API
+Route::controller(StatusController::class)->group(function () {
+    Route::get('/status', 'index');
+    Route::get('/status/{id}', 'show');
+    Route::get('/status/{id}/restore', 'restore');
+    Route::get('/status/restore', 'restoreAll');
+    Route::post('/status', 'store');
+    Route::post('/status/search', 'search');
+    Route::post('/status/delete/{id}', 'delete');
+    Route::put('/status/{id}', 'update');
+    // Route::delete('/phone/{id}', 'update');
+});
+
+// Satus API
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category', 'index');
+    Route::get('/category/{id}', 'show');
+    Route::get('/category/{id}/restore', 'restore');
+    Route::get('/category/restore', 'restoreAll');
+    Route::post('/category', 'store');
+    Route::post('/category/search', 'search');
+    Route::post('/category/delete/{id}', 'delete');
+    Route::put('/category/{id}', 'update');
+    // Route::delete('/phone/{id}', 'update');
+});
+
