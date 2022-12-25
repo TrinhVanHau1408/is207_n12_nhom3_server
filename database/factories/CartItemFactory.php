@@ -20,6 +20,7 @@ class CartItemFactory extends Factory
         return [
             'customerId' => Customer::inRandomOrder()->first()->id ,
             'phoneName' => 'Chưa có biết làm sao tự động hiện ra',
+            'imgUrl' => 'https://cdn.tgdd.vn/Products/Images/42/213031/iphone-12-den-1-1-org.jpg',
             'phoneDetailId'=> PhoneDetail::inRandomOrder()->first()->id,
             'priceSale' => $this->faker->randomElement([20000, 30000, 50000]),
             'quantity' => $this->faker->randomElement([2, 3, 5]),

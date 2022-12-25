@@ -16,6 +16,7 @@ class CustomerFactory extends Factory
         return [
             'userName' => $this->faker->userName(),
             'password' => $this->faker->password(),
+            'imgUrl' => 'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg',
             'name' => $this->faker->name(),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
             'phoneNumber' => $this->faker->phoneNumber(),

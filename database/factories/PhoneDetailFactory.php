@@ -19,6 +19,7 @@ class PhoneDetailFactory extends Factory
     {
         return [
             'phoneId' => Phone::inRandomOrder()->first()->id,
+            'imgUrl' => 'https://cdn.tgdd.vn/Products/Images/42/213031/iphone-12-den-1-1-org.jpg',
             'ramId' => Ram::inRandomOrder()->first()->id,
             'romId' => Rom::inRandomOrder()->first()->id,
             'colorId' => Color::inRandomOrder()->first()->id,

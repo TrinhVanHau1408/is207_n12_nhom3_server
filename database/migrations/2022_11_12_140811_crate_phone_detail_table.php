@@ -17,6 +17,7 @@ class CratePhoneDetailTable extends Migration
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->unsignedBigInteger('phoneId');
             $table->foreign('phoneId')->references('id')->on('phone')->onDelete('cascade');
+            $table->String('imgUrl');
             $table->unsignedBigInteger('ramId');
             $table->foreign('ramId')->references('id')->on('ram')->onDelete('cascade');
             $table->unsignedBigInteger('romId');

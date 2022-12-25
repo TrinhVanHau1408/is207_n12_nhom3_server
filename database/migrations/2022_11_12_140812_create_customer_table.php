@@ -17,6 +17,7 @@ class CreateCustomerTable extends Migration
             $table->id();
             $table->string('userName');
             $table->string('password');
+            $table->String('imgUrl');
             $table->string('name');
             $table->string('gender');
             $table->string('phoneNumber');

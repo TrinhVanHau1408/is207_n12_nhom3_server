@@ -13,6 +13,7 @@ class PhoneDetail extends Model
     public $table = "phone_detail";
     protected $fillable = [
         'phoneId',
+        'imgUrl',
         'ramId',
         'romId',
         'quantity',

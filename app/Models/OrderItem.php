@@ -15,6 +15,7 @@ class OrderItem extends Model
     protected $fillable = [
         'orderId',
         'phoneName',
+        'imgUrl',
         'phoneDetailId',
         'quantity',
         'priceSale',

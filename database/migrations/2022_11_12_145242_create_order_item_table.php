@@ -18,6 +18,7 @@ class CreateOrderItemTable extends Migration
             $table->unsignedBigInteger('orderId');
             $table->foreign('orderId')->references('id')->on('order')->onDelete('cascade');
             $table->string('phoneName');
+            $table->String('imgUrl');
             $table->unsignedBigInteger('phoneDetailId');
             $table->foreign('phoneDetailId')->references('id')->on('phone_detail')->onDelete('cascade');
             $table->integer('quantity');

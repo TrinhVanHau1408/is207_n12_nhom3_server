@@ -15,6 +15,7 @@ class CartItem extends Model
     protected $fillable = [
         'customerId',
         'phoneName',
+        'imgUrl',
         'phoneDetailId',
         'quantity',
         'priceSale',
