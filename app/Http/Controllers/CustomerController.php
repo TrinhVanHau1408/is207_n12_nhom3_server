@@ -95,6 +95,49 @@ class CustomerController extends Controller
         ];
     }
 
+    public function register(Request $request)
+    {
+        $request->validate([
+            'userName',
+            'email',
+            'phone',
+            'password'
+        ]);
+
+        $userName = $request->json("userName");
+        $email = $request->json("email");
+        $phone = $request->json("phone");
+        // $password = $request->json("password");
+
+
+        $isCheckUserName = Customer::where("userName", "=",$userName)->count();
+        $isCheckEmail = Customer::where("email", "=",$email)->count();
+        $isCheckPhone = Customer::where("phone", "=",$phone)->count();
+
+        // $error = array();
+        // if ($isCheckUserName || $isCheckEmail || $isCheckPhone) {
+        //     if ($isCheckUserName) array_push($error, 'User name đã tồn tại!');
+        //     if ($isCheckUserName) array_push($error, 'Email đã tồn tại!');
+        //     if ($isCheckPhone) array_push($error, 'Số điện thoại đã tồn tại!');
+
+        //     return [
+        //         'status' => 0,
+        //         'error' =>  $error
+        //     ];
+        // }
+
+        // $customer = Customer::create($request->json()->all());
+        // return [
+        //     "customer" =>  $customer
+        // ];
+
+         return [
+            "isCheckUserName" =>  $isCheckUserName
+        ];
+
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -142,7 +142,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
+        // $order = Order::find($id);
+        $order = Order::where('customerId','=', $id)->first();
 
         $orderId = $order->id;
         $paymentId = $order->paymentId;
@@ -169,6 +170,7 @@ class OrderController extends Controller
                 ]
             ]
         ];
+        // return ["satus"=> $order];
     }
 
     /**
