@@ -153,7 +153,10 @@ class OrderController extends Controller
         $addressReceiveId = $order->addressReceiveId;
         $statusId = $order->statusId;
 
-        $orderItem = OrderItem::where("orderId", "=", $orderId )->get();
+        $orderItem = OrderItem::join('order', 'order.id', '=', 'order_item.orderId')
+        ->where("orderId", "=", $orderId )
+        ->where('customerId','=', $id)
+        ->get();
         $payment = PaymentMethod::where("id", "=",  $paymentId)->select("id", "name")->first();
         $ship = ShipMethod::where("id", "=", $shipId)->select("id", "name", 'feePrice as free')->first();
         $addresReceive = AddressReceive::where("id", "=", $addressReceiveId)->select("id", "nameReceiver", "numberPhoneReceiver", "addressReceiver", "numberApartment", "defaultAddress")->first();
