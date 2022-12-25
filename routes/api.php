@@ -129,7 +129,7 @@ Route::controller(CartItemController::class)->group(function () {
     Route::get('/cart/customer/{id}', 'show');
     Route::post('/cart', 'store');
     Route::delete('/cart/delete/{id}', 'delete');
-    Route::put('/cart/{id}', 'update');
+    Route::put('/cart', 'update');
 });
 
 

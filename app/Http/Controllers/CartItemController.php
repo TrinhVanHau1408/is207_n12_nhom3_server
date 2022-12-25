@@ -115,17 +115,19 @@ class CartItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             "customerId",
-            "item"
+            "item",
+           
         ]);
 
         // $customerId = $request->json('customerId');
         $item =  $request->json('item');
         // $phoneId = $item['phoneId'];
         // $phoneDetailId = $item['phoneDetailId'];
+        $id = $item['id'];
         $quantity = $item['quantity'];
         $priceSale = $item['priceSale'];
 
@@ -133,10 +135,10 @@ class CartItemController extends Controller
         if ($quantity<=0) {
             $cartItem->forceDelete();
         } else {
+
             $cartItem->quantity = $quantity;
             $cartItem->priceSale = $priceSale;
             $cartItem->totalMoney = $cartItem->quantity * $priceSale;
-
             $cartItem->save();
         }
 
