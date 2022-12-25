@@ -102,6 +102,7 @@ class OrderController extends Controller
         foreach ($cartItemId as $key => $itemId) {
         
            $cartItem = CartItem::find($itemId);
+           $imgUrl = $cartItem->imgUrl;
            $phoneName = $cartItem->phoneName;
            $phoneDetailId = $cartItem->phoneDetailId;
            $priceSale = $cartItem->priceSale;
@@ -111,6 +112,7 @@ class OrderController extends Controller
            /// Thêm vào order item
             OrderItem::create([
                 "orderId" => $orderId,
+                "imgUrl" =>  $imgUrl,
                 "phoneName" => $phoneName,
                 "phoneDetailId" => $phoneDetailId,
                 "priceSale" => $priceSale,

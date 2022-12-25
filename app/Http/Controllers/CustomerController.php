@@ -42,6 +42,7 @@ class CustomerController extends Controller
             'userName',
             'password',
             'name',
+            'imgUrl',
             'gender',
             'phoneNumber',
             'email',
@@ -131,6 +132,7 @@ class CustomerController extends Controller
             [
                 'userName' => $userName,
                 'password' => $password,
+                'imgUrl' => 'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg',
                 'name' => '',
                 'gender' => '',
                 'phoneNumber' => $phone,

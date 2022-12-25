@@ -47,6 +47,7 @@ class CartItemController extends Controller
         $customerId = $request->json('customerId');
         $item =  $request->json('item');
         $phoneId = $item['phoneId'];
+        $imgUrl = $item['imgUrl'];
         $phoneDetailId = $item['phoneDetailId'];
         $quantity = $item['quantity'];
         $priceSale = $item['priceSale'];
@@ -60,6 +61,7 @@ class CartItemController extends Controller
         if (!$cartItem) {
             $cartItem = CartItem::create([
                 "customerId" => $customerId,
+                "imgUrl" => $imgUrl,
                 "phoneName" => $phone->name,
                 "phoneDetailId" => $phoneDetailId,
                 "quantity" => $quantity,
